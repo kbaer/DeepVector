@@ -1,0 +1,478 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+reorder rootPrims = ["Root", "GridMaterial"]
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Sphere_Left", "Sphere_Right", "GridMaterial"]
+    def "GridMaterial" (
+        active = true
+        references = @Materials/GridMaterial.usda@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "TriangleTube" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0, 0, -0.2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "TriangleTube_1" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.0061765932, 0, -0.4)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_1/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_2" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -0.6)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_2/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_3" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.7071067, -0.70710677, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -0.8)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_3/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_4" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_4/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_5" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -1.2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_5/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_6" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -1.4)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_6/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_7" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -1.4)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_7/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_8" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -1.6)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_8/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_9" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -1.8)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_9/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_10" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_10/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_11" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_11/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_12" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -2.2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_12/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_13" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -2.4)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_13/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_14" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -2.6)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_14/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_15" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -2.8)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_15/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_16" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -3)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_16/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_17" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -3.2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_17/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_18" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -3.4)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_18/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_19" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -3.6)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_19/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+
+    def "TriangleTube_20" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707963, 0, 0)
+        }
+        prepend references = @TriangleTube.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0.003426915, 0, -3.8)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:surface.connect = </Root/TriangleTube_20/Materials/defaultMaterial/Shader.outputs:surface>
+            }
+        }
+    }
+}
+

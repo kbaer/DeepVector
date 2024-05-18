@@ -12,6 +12,7 @@ struct DeepVectorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//            IterationView()
         }.windowStyle(.volumetric)
 
         ImmersiveSpace(id: "ImmersiveSpace") {
