@@ -36,18 +36,14 @@ struct IterationView: View {
     var body: some View {
         ZStack {
             ForEach(Array(triangleArray.enumerated()), id: \.offset) { index, triangle in
-                
-//                    PhaseAnimator([true, false]) { triangle, rotate3D in
-                        Triangle()
-                        .stroke(.red, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                        .frame(width: 1000, height: 1000, alignment: .center)
-                        .offset(z: CGFloat( index * 20))
-                            .scaleEffect(CGSize(width: 0.6, height: 0.6))
-                            .rotation3DEffect(.degrees(/*rotate3D ? Double(index) * -3.0 : */Double(index) * 3.0), axis: (x: 0, y: 0, z: 1))
-//                    } animation: { rotate3D in
-//                            .easeInOut
-//                    }
-x            }
+                Triangle()
+                    .stroke(.red, style: StrokeStyle(lineWidth: 8
+                                                     , lineCap: .round, lineJoin: .round))
+                    .frame(width: 1500, height: 1500, alignment: .center)
+                    .offset(z: CGFloat( index * 20))
+                    .rotationEffect(Angle(degrees: CGFloat(index * 3)))
+                    .scaleEffect(CGSize(width: 0.6, height: 0.6))
+            }
         }
     }
     
