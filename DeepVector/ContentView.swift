@@ -32,6 +32,7 @@ struct TriangleModel: Identifiable {
 struct IterationView: View {
     
     var triangleArray: [TriangleModel] = Array(repeating: TriangleModel(scale: 1.0, rotation: 0.0, color: .red), count: 40)
+    var deltaAngle: Double = 3
     
     var body: some View {
         ZStack {
@@ -41,7 +42,7 @@ struct IterationView: View {
                                                      , lineCap: .round, lineJoin: .round))
                     .frame(width: 1500, height: 1500, alignment: .center)
                     .offset(z: CGFloat( index * 20))
-                    .rotationEffect(Angle(degrees: CGFloat(index * 3)))
+                    .rotationEffect(Angle(degrees: CGFloat(Double(index) * deltaAngle)))
                     .scaleEffect(CGSize(width: 0.6, height: 0.6))
             }
         }
@@ -58,19 +59,35 @@ struct ContentView: View {
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
     
+    @State var deltaAngle : Double = 3.0
+    @State var iterationView = IterationView()
 
     var body: some View {
-        VStack {
+        ZStack {
+            iterationView
             VStack (spacing: 12) {
-                Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
-                    .font(.title)
-                IterationView()
+                Text("Delta Degrees:")
+                Text(
+                    String(format: "%.1f", deltaAngle)
+                )
+                Slider(value: $deltaAngle,
+                       in: -30...30,
+                       onEditingChanged: { (_) in
+                            iterationView.deltaAngle = deltaAngle
+                       },
+                       minimumValueLabel: Text("-30"),
+                       maximumValueLabel: Text("30"),
+                       label: {
+                            Text("Title")
+                       }
+                )
+                .accentColor(.red)
             }
-            .frame(width: 360)
-            .padding(36)
-            .glassBackgroundEffect(displayMode: .always)
+                    }
+        .frame(width: 800, height: 400)
+        .padding(36)
+        .glassBackgroundEffect(displayMode: .implicit)
 
-        }
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {
                 if newValue {
