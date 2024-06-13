@@ -20,6 +20,21 @@ struct Triangle: Shape {
         
         return path
     }
+    
+    func animateShape(index: Int, isAnimated: Bool, deltaAngle: Double) -> some View {
+        let twoPi: Double = 2.0 * 3.1415927
+        let deltaFactor = sin(Double(index)/15.0 * twoPi)
+        let rotateDelta = isAnimated ? deltaAngle : 0
+        let scaleDelta = isAnimated ? (0.05 * deltaFactor) : 0.0
+        return self
+            .stroke(.red, style: StrokeStyle(lineWidth: 8
+                                             , lineCap: .round, lineJoin: .round))
+            .frame(width: 800, height: 800, alignment: .bottom)
+            .offset(z: CGFloat(index * 20))
+            .rotationEffect(Angle(degrees: CGFloat(Double(index) * rotateDelta)))
+            .scaleEffect(CGSize(width: 0.6 + scaleDelta, height: 0.6 + scaleDelta))
+            .animation(.easeInOut(duration: 0.1).delay(Double(index)*0.05).repeatForever(autoreverses: true), value: isAnimated)
+    }
 }
 
 struct TriangleModel: Identifiable {
@@ -30,25 +45,20 @@ struct TriangleModel: Identifiable {
 }
 
 struct IterationView: View {
-    
-    var triangleArray: [TriangleModel] = Array(repeating: TriangleModel(scale: 1.0, rotation: 0.0, color: .red), count: 40)
     var deltaAngle: Double = 3
+    @Binding var isAnimated: Bool
+    @Binding var throbAmount: Double
+    var triangleArray: [TriangleModel] = Array(repeating: TriangleModel(scale: 1.0, rotation: 0.0, color: .blue), count: 40)
     
+    @ViewBuilder
     var body: some View {
         ZStack {
             ForEach(Array(triangleArray.enumerated()), id: \.offset) { index, triangle in
                 Triangle()
-                    .stroke(.red, style: StrokeStyle(lineWidth: 8
-                                                     , lineCap: .round, lineJoin: .round))
-                    .frame(width: 1500, height: 1500, alignment: .center)
-                    .offset(z: CGFloat( index * 20))
-                    .rotationEffect(Angle(degrees: CGFloat(Double(index) * deltaAngle)))
-                    .scaleEffect(CGSize(width: 0.6, height: 0.6))
+                    .animateShape(index: index, isAnimated: isAnimated, deltaAngle: deltaAngle)
             }
         }
     }
-    
-    
 }
 
 struct ContentView: View {
@@ -60,10 +70,12 @@ struct ContentView: View {
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
     
     @State var deltaAngle : Double = 3.0
-    @State var iterationView = IterationView()
+    @State var isAnimated: Bool = false
+    @State var throbAmount: Double = 0.0
 
     var body: some View {
-        ZStack {
+        HStack {
+            var iterationView = IterationView(isAnimated: $isAnimated, throbAmount: $throbAmount)
             iterationView
             VStack (spacing: 12) {
                 Text("Delta Degrees:")
@@ -71,23 +83,24 @@ struct ContentView: View {
                     String(format: "%.1f", deltaAngle)
                 )
                 Slider(value: $deltaAngle,
-                       in: -30...30,
+                       in: 0...15,
                        onEditingChanged: { (_) in
-                            iterationView.deltaAngle = deltaAngle
-                       },
-                       minimumValueLabel: Text("-30"),
-                       maximumValueLabel: Text("30"),
+                    iterationView.deltaAngle = deltaAngle
+                },
+                       minimumValueLabel: Text("0"),
+                       maximumValueLabel: Text("15"),
                        label: {
-                            Text("Title")
-                       }
-                )
+                    Text("Title")
+                })
                 .accentColor(.red)
-            }
-                    }
-        .frame(width: 800, height: 400)
-        .padding(36)
-        .glassBackgroundEffect(displayMode: .implicit)
-
+                Spacer()
+                Toggle("Animate", isOn: $isAnimated//.animation(.easeInOut.repeatForever(autoreverses: true))
+                )
+             }
+            .frame(width: 400, height: 300)
+            .padding(36)
+            .glassBackgroundEffect(displayMode: .implicit)
+        }
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {
                 if newValue {
