@@ -22,18 +22,19 @@ struct Triangle: Shape {
     }
     
     func animateShape(index: Int, isAnimated: Bool, deltaAngle: Double) -> some View {
-        let twoPi: Double = 2.0 * 3.1415927
+        let twoPi: Double = 2.0 * Double.pi
         let deltaFactor = sin(Double(index)/15.0 * twoPi)
-        let rotateDelta = isAnimated ? deltaAngle : 0
-        let scaleDelta = isAnimated ? (0.05 * deltaFactor) : 0.0
+        let rotateDelta = isAnimated ? deltaAngle : -deltaAngle
+        let scaleDelta = isAnimated ? (0.1 * deltaFactor) : 0.0
         return self
             .stroke(.red, style: StrokeStyle(lineWidth: 8
                                              , lineCap: .round, lineJoin: .round))
             .frame(width: 800, height: 800, alignment: .bottom)
             .offset(z: CGFloat(index * 20))
+            .rotation3DEffect(Angle(degrees: deltaAngle), axis: (x:0, y: 0, z: 1), anchor: .center)
             .rotationEffect(Angle(degrees: CGFloat(Double(index) * rotateDelta)))
             .scaleEffect(CGSize(width: 0.6 + scaleDelta, height: 0.6 + scaleDelta))
-            .animation(.easeInOut(duration: 0.1).delay(Double(index)*0.05).repeatForever(autoreverses: true), value: isAnimated)
+            .animation(.easeInOut(duration: 1.0).delay(Double(index)*0.1).repeatForever(autoreverses: true), value: isAnimated)
     }
 }
 
@@ -45,7 +46,7 @@ struct TriangleModel: Identifiable {
 }
 
 struct IterationView: View {
-    var deltaAngle: Double = 3
+    @Binding var deltaAngle: Double
     @Binding var isAnimated: Bool
     @Binding var throbAmount: Double
     var triangleArray: [TriangleModel] = Array(repeating: TriangleModel(scale: 1.0, rotation: 0.0, color: .blue), count: 40)
@@ -75,7 +76,7 @@ struct ContentView: View {
 
     var body: some View {
         HStack {
-            var iterationView = IterationView(isAnimated: $isAnimated, throbAmount: $throbAmount)
+            var iterationView = IterationView(deltaAngle: $deltaAngle, isAnimated: $isAnimated, throbAmount: $throbAmount)
             iterationView
             VStack (spacing: 12) {
                 Text("Delta Degrees:")
