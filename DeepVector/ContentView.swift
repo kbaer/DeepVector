@@ -27,7 +27,7 @@ struct Triangle: Shape {
         let rotateDelta = isAnimated ? deltaAngle : -deltaAngle
         let scaleDelta = isAnimated ? (0.1 * deltaFactor) : 0.0
         return self
-            .stroke(.red, style: StrokeStyle(lineWidth: 8
+            .stroke(.green, style: StrokeStyle(lineWidth: 8
                                              , lineCap: .round, lineJoin: .round))
             .frame(width: 800, height: 800, alignment: .bottom)
             .offset(z: CGFloat(index * 20))
@@ -54,6 +54,7 @@ struct IterationView: View {
     @ViewBuilder
     var body: some View {
         ZStack {
+            
             ForEach(Array(triangleArray.enumerated()), id: \.offset) { index, triangle in
                 Triangle()
                     .animateShape(index: index, isAnimated: isAnimated, deltaAngle: deltaAngle)

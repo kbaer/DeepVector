@@ -13,7 +13,9 @@ struct DeepVectorApp: App {
         WindowGroup {
             ContentView()
 //            IterationView()
-        }.windowStyle(.volumetric)
+        }
+            .windowStyle(.volumetric)
+            .defaultSize(width: 3, height: 3, depth: 6, in: .meters)
 
         ImmersiveSpace(id: "ImmersiveSpace") {
             ImmersiveView()
