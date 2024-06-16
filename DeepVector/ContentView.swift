@@ -24,17 +24,16 @@ struct Triangle: Shape {
     func animateShape(index: Int, isAnimated: Bool, deltaAngle: Double) -> some View {
         let twoPi: Double = 2.0 * Double.pi
         let deltaFactor = sin(Double(index)/15.0 * twoPi)
-        let rotateDelta = isAnimated ? deltaAngle : -deltaAngle
+        let rotateDelta = isAnimated ? deltaAngle : -deltaAngle * 2
         let scaleDelta = isAnimated ? (0.1 * deltaFactor) : 0.0
         return self
             .stroke(.green, style: StrokeStyle(lineWidth: 8
                                              , lineCap: .round, lineJoin: .round))
             .frame(width: 800, height: 800, alignment: .bottom)
             .offset(z: CGFloat(index * 20))
-            .rotation3DEffect(Angle(degrees: deltaAngle), axis: (x:0, y: 0, z: 1), anchor: .center)
             .rotationEffect(Angle(degrees: CGFloat(Double(index) * rotateDelta)))
             .scaleEffect(CGSize(width: 0.6 + scaleDelta, height: 0.6 + scaleDelta))
-            .animation(.easeInOut(duration: 1.0).delay(Double(index)*0.1).repeatForever(autoreverses: true), value: isAnimated)
+            .animation(.linear(duration: 1.0).delay(Double(index)*0.1).repeatCount(4, autoreverses: true), value: isAnimated)
     }
 }
 
@@ -53,8 +52,8 @@ struct IterationView: View {
     
     @ViewBuilder
     var body: some View {
+        
         ZStack {
-            
             ForEach(Array(triangleArray.enumerated()), id: \.offset) { index, triangle in
                 Triangle()
                     .animateShape(index: index, isAnimated: isAnimated, deltaAngle: deltaAngle)
@@ -64,12 +63,6 @@ struct IterationView: View {
 }
 
 struct ContentView: View {
-
-    @State private var showImmersiveSpace = false
-    @State private var immersiveSpaceIsShown = false
-
-    @Environment(\.openImmersiveSpace) var openImmersiveSpace
-    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
     
     @State var deltaAngle : Double = 3.0
     @State var isAnimated: Bool = false
@@ -103,28 +96,9 @@ struct ContentView: View {
             .padding(36)
             .glassBackgroundEffect(displayMode: .implicit)
         }
-        .onChange(of: showImmersiveSpace) { _, newValue in
-            Task {
-                if newValue {
-                    switch await openImmersiveSpace(id: "ImmersiveSpace") {
-                    case .opened:
-                        immersiveSpaceIsShown = true
-                    case .error, .userCancelled:
-                        fallthrough
-                    @unknown default:
-                        immersiveSpaceIsShown = false
-                        showImmersiveSpace = false
-                    }
-                } else if immersiveSpaceIsShown {
-                    await dismissImmersiveSpace()
-                    immersiveSpaceIsShown = false
-                }
-            }
-        }
     }
 }
 
 #Preview(windowStyle: .volumetric) {
     ContentView()
-    ImmersiveView()
 }
