@@ -7,3 +7,5 @@ There's a button to toggle animation, which animates between negative and positi
 The Reset button hides and shows the triangles, using the animated sequence first showing a white triangle with a glow, then fading to green with no glow. This intended to emulate the Tektronix vector graphics phosphore screen.
 
 This is still a work in progress, and I'm still getting used to SwiftUI after being a Swift dev for the last decade or so. Suggestions welcome.
+
+-Ken Baer.
