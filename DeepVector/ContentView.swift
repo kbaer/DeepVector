@@ -41,12 +41,8 @@ struct IterationView: View {
     
     @ViewBuilder
     var body: some View {
-//        let twoPi: Double = 2.0 * Double.pi
         ZStack {
-//            let triangle = triangleArray[0]
-//            let index = 0
         ForEach(Array(triangleArray.enumerated()), id: \.offset) { index, triangle in
-//                let deltaFactor = sin(Double(index)/15.0 * twoPi)
                 let rotateDelta = animate ? deltaAngle : -deltaAngle
                 triangle.triangleShape
                     .stroke(.green, style: StrokeStyle(lineWidth: 8
@@ -54,7 +50,6 @@ struct IterationView: View {
                     .overlay {
                         triangle.triangleShape
                             .stroke(.white, style: StrokeStyle(lineWidth: 10, lineCap: .round))
-//                            .fill(.green)
                             .blur(radius: 10, opaque: true)
                             .opacity(visibleTrigger ? 0.0 : 1.0)
                             .animation(.easeOut(duration: 0.3).delay(Double(index)*0.08), value: visibleTrigger)
