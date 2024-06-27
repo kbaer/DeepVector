@@ -42,26 +42,26 @@ struct IterationView: View {
     @ViewBuilder
     var body: some View {
         ZStack {
-        ForEach(Array(triangleArray.enumerated()), id: \.offset) { index, triangle in
+            ForEach(Array(triangleArray.enumerated()), id: \.offset) { index, triangle in
                 let rotateDelta = animate ? deltaAngle : -deltaAngle
                 triangle.triangleShape
                     .stroke(.green, style: StrokeStyle(lineWidth: 8
                                                      , lineCap: .round, lineJoin: .round))
                     .overlay {
                         triangle.triangleShape
-                            .stroke(.white, style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                            .stroke(.white, style: StrokeStyle(lineWidth: 12, lineCap: .round))
                             .blur(radius: 10, opaque: true)
                             .opacity(visibleTrigger ? 0.0 : 1.0)
-                            .animation(.easeOut(duration: 0.3).delay(Double(index)*0.08), value: visibleTrigger)
+                            .animation(.easeOut(duration: 0.4).delay(Double(index) * 0.12), value: visibleTrigger)
                     }
+                    .id(animate)
                     .frame(width: 800, height: 800, alignment: .bottom)
                     .offset(z: CGFloat(Double(index) * spacing))
                     .rotationEffect(Angle(degrees: animate ? (CGFloat(Double(index) * ( rotationAnimationTrigger ? rotateDelta : -rotateDelta))) :  Double(index) * rotateDelta))
                     .scaleEffect(CGSize(width: 0.6, height: 0.6))
                     .opacity(visibleTrigger ? 1.0 : 0.0)
-                    .id(animate)
-                    .animation(.easeInOut(duration: 1.0).delay(Double(index)*0.1).repeatForever(autoreverses: true), value: rotationAnimationTrigger)
-                    .animation(.easeOut(duration: visibleTrigger ? 0.3 : 0.0).delay(Double(index)*0.08), value: visibleTrigger)
+                    .animation(.easeInOut(duration: 1.0).delay(Double(index)*0.05).repeatForever(autoreverses: true), value: rotationAnimationTrigger)
+                    .animation(.easeOut(duration: visibleTrigger ? 0.4 : 0.0).delay(Double(index) * 0.12), value: visibleTrigger)
             }
         }
         .onChange(of: animate){ oldValue, shouldChange in
